@@ -2,6 +2,7 @@ import React from 'react';
 import './Banner.css'
 import Button from '../../../Components/Button/Button';
 
+
 const Banner = () => {
     return (
         <div className='banner-section my-4'>
