@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Button = ({ children, margin, border, rounded, to }) => {
+const Button = ({ children, margin, border, width, position, rounded, to }) => {
     return (
-        <div>
-            <button className={ `btn btn-primary ${margin} ` }><Link to={ to }>{ children }</Link></button>
-        </div>
+        <button className={ `btn btn-primary ${margin}` }><Link to={ to }>{ children }</Link></button>
     );
 };
 
