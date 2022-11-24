@@ -26,6 +26,12 @@ const Register = () => {
                     <div className="relative my-2">
                         <input { ...register("password") } type="password" placeholder="Your Password" className="input input-bordered input-warning w-full max-w-xs" />
                     </div>
+                    <div className="form-control">
+                        <label className="cursor-pointer label">
+                            <span className="label-text">Register as a Seller?</span>
+                            <input { ...register("isSeller") } type="checkbox" className="checkbox checkbox-primary" />
+                        </label>
+                    </div>
                     <button type="submit" className="mt-3 text-white w-full bg-primary hover:bg-orange-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-primary ">Register</button>
                     <div className='mb-2 text-center flex flex-row items-center justify-evenly mt-2 '>
                         <hr className=' border-gray-500 w-1/4' />
