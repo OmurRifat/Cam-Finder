@@ -3,7 +3,7 @@ import Banner from '../Banner/Banner';
 
 const Home = () => {
     return (
-        <div>
+        <div className=' min-h-screen'>
             <h4>This is Home components.</h4>
             <Banner></Banner>
         </div>
