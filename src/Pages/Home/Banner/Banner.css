@@ -1,0 +1,6 @@
+.banner-section {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(255, 255, 255, 0) 100%), url(../../../assets/images/banner.jpg);
+    height: 400px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
