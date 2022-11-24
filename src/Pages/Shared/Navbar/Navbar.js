@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../../../Components/Button/Button';
+import img2 from '../../../assets/logo/logo-3(removed-bg).png'
 
 const Navbar = () => {
     return (
@@ -17,7 +19,7 @@ const Navbar = () => {
                                     Brand
                                     <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
                                 </Link>
-                                <ul className="p-2">
+                                <ul className="p-2 bg-white rounded-lg text-black">
                                     <li><Link to="" >Cannon</Link></li>
                                     <li><Link to="" >Sony</Link></li>
                                     <li><Link to="" >Nikon</Link></li>
@@ -27,7 +29,8 @@ const Navbar = () => {
                             <li><Link to="" >Dashboard</Link></li>
                         </ul>
                     </div>
-                    <Link to="" className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+
+                    <Link to="/" className=" font-bold text-xl flex items-center"><img className=' hidden md:block w-1/5' src={ img2 } alt="" />CAM FINDER</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
@@ -37,7 +40,7 @@ const Navbar = () => {
                                 Brand
                                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
                             </Link>
-                            <ul className="p-2">
+                            <ul className="p-2 bg-white rounded-lg text-black">
                                 <li><Link to="" >Cannon</Link></li>
                                 <li><Link to="" >Sony</Link></li>
                                 <li><Link to="" >Nikon</Link></li>
@@ -48,7 +51,11 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="" className="btn">Login</Link>
+                    <Button
+                        to='/register'
+                    >
+                        Login/Signup
+                    </Button>
                 </div>
             </div>
         </div>
