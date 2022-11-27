@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../../Components/Button/Button';
 import img2 from '../../../assets/logo/logo-3(removed-bg).png'
+import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
 
 const Navbar = () => {
+    const { user, setUser, logOut } = useContext(AuthContext)
+    const handleLogout = () => {
+        logOut()
+            .then(() => { setUser(null) })
+            .catch(err => console.log(err.message))
+    }
     return (
         <div className=" ">
             <div className="navbar bg-gray-50 shadow-md px-4 md:px-32">
@@ -51,11 +58,18 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Button
-                        to='/register'
-                    >
-                        Login/Signup
-                    </Button>
+                    {
+                        user?.uid ? <button className='btn btn-primary'
+                            onClick={ handleLogout }
+                        >
+                            Logout
+                        </button> :
+                            <Button
+                                to='/register'
+                            >
+                                Register/Login
+                            </Button>
+                    }
                 </div>
             </div>
         </div>
