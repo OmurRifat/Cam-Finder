@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '../Modal/Modal';
 
 const Category = ({ data }) => {
+    const [booking, setBooking] = useState([])
+    console.log(booking)
     // console.log(data);
     const { name, imgURL, condition, location, originalPrice, postedTime, resalePrice, sellerName, sellerNumber, YearOfPurchase, yearOfUse } = data
     return (
         <div className='card card-compact w-96 bg-base-100 shadow-xl'>
-            <Modal></Modal>
+            { booking[0] || <Modal
+                data={ data }
+                setBooking={ setBooking }
+            ></Modal> }
             <figure><img className='w-1/2' src={ imgURL } alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{ name }</h2>
