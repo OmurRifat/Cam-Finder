@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import LogIn from "../../Pages/Authentication/LogIn/LogIn";
 import Register from "../../Pages/Authentication/Register/Register";
@@ -33,6 +34,16 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
             }
         ])
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <div>This will empty at first...</div>
+            }
+        ]
     }
 
 ])
