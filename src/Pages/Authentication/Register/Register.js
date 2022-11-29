@@ -1,28 +1,88 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { googleSignIn, setUser, emailRegister } = useContext(AuthContext)
+    const { googleSignIn, setUser, emailRegister, updateUser } = useContext(AuthContext)
 
+
+    let userInfo = {}
     const handleRegister = (data) => {
         // console.log(data)
+        userInfo = {
+            name: data.name,
+            email: data.email,
+            seller: data.isSeller,
+            admin: false
+        }
         emailRegister(data.email, data.password)
-            .then(result => setUser(result.user))
+            .then(result => {
+                updateUser({ displayName: data.name })
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(fedData => console.log(fedData))
+                setUser(result.user)
+                toast.success("User Registered Sucesfully");
+            })
             .catch(err => console.log(err.message))
+        toast.error("An Error Occured");
     }
     const handleGoogleSignIn = () => {
         googleSignIn()
-            .then(result => setUser(result.user))
+            .then(result => {
+
+                userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email,
+                    seller: false,
+                    admin: false
+                }
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(fedData => console.log(fedData))
+                setUser(result.user)
+                toast.success("User Registered Sucesfully");
+            })
             .catch(error => console.log(error.message))
+        toast.error("An Error Occured");
     }
+
+    // const { data: userData } = useQuery({
+    //     queryKey: ['user'],
+    //     queryFn: () => {
+    //         fetch('http://localhost:5000/user', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'content-type': 'application/json',
+    //             },
+    //             body: JSON.stringify()
+    //         })
+    //     }
+    // })
     return (
         <div>
             <form onSubmit={ handleSubmit(handleRegister) } className=' w-2/3 md:w-1/4 mx-auto my-28'>
                 <div className="shadow-primary shadow-xl rounded-xl px-6 pt-10 pb-8">
                     <h4 className=' text-center mb-6  my-2 text-xl font-bold text-primary'>Register</h4>
+                    <div className="relative my-2">
+                        <input { ...register("name") } type="text" placeholder="Your Name" className="input input-bordered input-warning w-full max-w-xs" />
+                    </div>
                     <div className="relative my-2">
                         <input { ...register("email") } type="text" placeholder="Your Email" className="input input-bordered input-warning w-full max-w-xs" />
                     </div>

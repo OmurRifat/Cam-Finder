@@ -1,5 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
 
@@ -10,12 +12,21 @@ const LogIn = () => {
     const handleLogin = (data) => {
         // console.log(data)
         emailSignIn(data.email, data.password)
+            .then(result => {
+                setUser(result.user);
+                toast.success("User Registered Sucesfully");
+            })
+            .catch(error => toast.error(error.message))
     }
     const handleGoogleSignIn = () => {
         googleSignIn()
-            .then(result => setUser(result.user))
-            .catch(error => console.log(error.message))
+            .then(result => {
+                setUser(result.user)
+                toast.success("User LogIn Sucesfully");
+            })
+            .catch(error => toast.error(error.message))
     }
+
     return (
         <div>
             <form onSubmit={ handleSubmit(handleLogin) } className=' w-2/3 md:w-1/4 mx-auto my-28'>
