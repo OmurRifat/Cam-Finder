@@ -11,6 +11,7 @@ import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import Categories from "../../Pages/Home/Categories/Categories";
 import Home from "../../Pages/Home/Home/Home";
 import Products from "../../Pages/Home/Products/Products";
+import PrivateRoute from "../PrivateRouter/PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -35,14 +36,14 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <Categories></Categories>,
+                element: <PrivateRoute><Categories></Categories></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
             }
         ])
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
                 path: '/dashboard',

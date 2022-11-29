@@ -2,13 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { googleSignIn, setUser, emailRegister, updateUser } = useContext(AuthContext)
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     let userInfo = {}
     const handleRegister = (data) => {
@@ -33,6 +37,7 @@ const Register = () => {
                     .then(fedData => console.log(fedData))
                 setUser(result.user)
                 toast.success("User Registered Sucesfully");
+                navigate(from, { replace: true });
             })
             .catch(err => console.log(err.message))
         toast.error("An Error Occured");
@@ -58,6 +63,7 @@ const Register = () => {
                     .then(fedData => console.log(fedData))
                 setUser(result.user)
                 toast.success("User Registered Sucesfully");
+                navigate(from, { replace: true });
             })
             .catch(error => console.log(error.message))
         toast.error("An Error Occured");

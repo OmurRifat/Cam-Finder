@@ -2,19 +2,23 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
 
 const LogIn = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { googleSignIn, setUser, emailSignIn } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const location = useLocation();
 
+    const from = location.state?.from?.pathname || '/';
     const handleLogin = (data) => {
         // console.log(data)
         emailSignIn(data.email, data.password)
             .then(result => {
                 setUser(result.user);
                 toast.success("User LogedIn Sucesfully");
+                navigate(from, { replace: true });
             })
             .catch(error => toast.error(error.message))
     }
@@ -23,6 +27,7 @@ const LogIn = () => {
             .then(result => {
                 setUser(result.user)
                 toast.success("User LogIn Sucesfully");
+                navigate(from, { replace: true });
             })
             .catch(error => toast.error(error.message))
     }
