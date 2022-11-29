@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -52,14 +53,15 @@ const Register = () => {
                     seller: false,
                     admin: false
                 }
-                fetch('http://localhost:5000/user', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(userInfo)
-                })
-                    .then(res => res.json())
+                // fetch('http://localhost:5000/user', {
+                //     method: 'POST',
+                //     headers: {
+                //         'content-type': 'application/json',
+                //     },
+                //     body: JSON.stringify(userInfo)
+                // })
+                //     .then(res => res.json())
+                axios.post('http://localhost:5000/user', userInfo)
                     .then(fedData => console.log(fedData))
                 setUser(result.user)
                 toast.success("User Registered Sucesfully");

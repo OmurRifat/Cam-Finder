@@ -4,12 +4,11 @@ import { AuthContext } from '../../Context/AuthContext/AuthProvider';
 import useAdmin from '../../hooks/useAdmin';
 import useSeller from '../../hooks/useSeller';
 import Navbar from '../../Pages/Shared/Navbar/Navbar';
-import Spinner from '../../Pages/Shared/Spinner/Spinner';
 
 const DashboardLayout = () => {
-    const { user, loading } = useContext(AuthContext)
-    const [isAdmin, isAdminLoading] = useAdmin(user?.email)
-    const [isSeller, isSellerLoading] = useSeller(user?.email)
+    const { user } = useContext(AuthContext)
+    const [isAdmin] = useAdmin(user?.email)
+    const [isSeller] = useSeller(user?.email)
 
     return (
         <div>
