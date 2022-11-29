@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,7 +8,7 @@ import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { googleSignIn, setUser, emailRegister, updateUser } = useContext(AuthContext)
+    const { googleSignIn, setUser, emailRegister, updateUser, setLoading } = useContext(AuthContext)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -27,21 +27,17 @@ const Register = () => {
         emailRegister(data.email, data.password)
             .then(result => {
                 updateUser({ displayName: data.name })
-                fetch('http://localhost:5000/user', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(userInfo)
-                })
-                    .then(res => res.json())
-                    .then(fedData => console.log(fedData))
-                setUser(result.user)
-                toast.success("User Registered Sucesfully");
-                navigate(from, { replace: true });
+                axios.post('http://localhost:5000/user', userInfo)
+                    .then(fedData => {
+                        if (fedData.status === 200) {
+                            setUser(result.user)
+                            toast.success("User Registered Sucesfully");
+                            setLoading(false)
+                            navigate(from, { replace: true });
+                        }
+                    })
             })
-            .catch(err => console.log(err.message))
-        toast.error("An Error Occured");
+            .catch(err => toast.error(err.message))
     }
     const handleGoogleSignIn = () => {
         googleSignIn()
@@ -53,22 +49,19 @@ const Register = () => {
                     seller: false,
                     admin: false
                 }
-                // fetch('http://localhost:5000/user', {
-                //     method: 'POST',
-                //     headers: {
-                //         'content-type': 'application/json',
-                //     },
-                //     body: JSON.stringify(userInfo)
-                // })
-                //     .then(res => res.json())
                 axios.post('http://localhost:5000/user', userInfo)
-                    .then(fedData => console.log(fedData))
-                setUser(result.user)
-                toast.success("User Registered Sucesfully");
-                navigate(from, { replace: true });
+                    .then(fedData => {
+                        if (fedData.status === 200) {
+                            setUser(result.user)
+                            toast.success("User Registered Sucesfully");
+                            setLoading(false)
+                            navigate(from, { replace: true });
+                        }
+                    })
+
             })
-            .catch(error => console.log(error.message))
-        toast.error("An Error Occured");
+            .catch(error => toast.error(error.message))
+
     }
 
     // const { data: userData } = useQuery({
