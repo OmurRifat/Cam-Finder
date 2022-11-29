@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import Modal from '../Modal/Modal';
 
 const Category = ({ data }) => {
-    const [booking, setBooking] = useState([])
+    const [booking, setBooking] = useState(false)
     console.log(booking)
     // console.log(data);
     const { name, imgURL, condition, location, originalPrice, postedTime, resalePrice, sellerName, sellerNumber, YearOfPurchase, yearOfUse } = data
     return (
         <div className='card card-compact w-96 bg-base-100 shadow-xl'>
-            { booking[0] || <Modal
+            { booking && <Modal
                 data={ data }
                 setBooking={ setBooking }
             ></Modal> }
@@ -23,7 +23,7 @@ const Category = ({ data }) => {
                 <p>Seller Name: { sellerName }</p>
                 <p>Post time: { postedTime }</p>
                 <div className="card-actions justify-end">
-                    <label htmlFor="booking-data" className="btn btn-primary">Book now</label>
+                    <label htmlFor="booking-data" className="btn btn-primary" onClick={ () => setBooking(true) }>Book now</label>
                 </div>
             </div>
         </div>

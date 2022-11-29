@@ -1,14 +1,24 @@
+import axios from 'axios';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
 
 const Modal = ({ data, setBooking }) => {
     const { user } = useContext(AuthContext);
     // console.log(user)
     const { name, resalePrice } = data;
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const formSubmit = (data) => {
-        setBooking([data]);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const formSubmit = (data, e) => {
+        console.log(data)
+        axios.post('http://localhost:5000/orders', data)
+            .then(res => {
+                if (res.status === 200) {
+                    toast.success("Successfull Booked.")
+                }
+            })
+        e.target.reset();
+        setBooking(false)
     }
     return (
         <div>
@@ -24,12 +34,11 @@ const Modal = ({ data, setBooking }) => {
                             <input type="text" { ...register("price", { value: resalePrice }) } value={ `$${resalePrice}` } disabled className="input input-bordered input-warning w-full mt-4 mb-1" />
                             <input type="number" { ...register("phoneNumber") } placeholder="Phone Number" className="input input-bordered input-warning w-full mt-4 mb-1" />
                             <input type="text" { ...register("location") } placeholder="Meeting Location" className="input input-bordered input-warning w-full mt-4 mb-1" />
-                            <input type="submit" value="Submit" />
+                            <div className="modal-action" >
+                                <input onClick={ () => setBooking(true) } type="submit" value="Place Order" className='btn btn-primary' />
+                            </div>
                         </form>
                     }
-                    <div className="modal-action" >
-                        <label htmlFor="booking-data" className="btn btn-primary">Submit</label>
-                    </div>
                 </div>
             </div>
         </div>
