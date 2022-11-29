@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import Button from '../../../Components/Button/Button';
 import img2 from '../../../assets/logo/logo-3(removed-bg).png'
 import { AuthContext } from '../../../Context/AuthContext/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
     const { user, setUser, logOut } = useContext(AuthContext)
     const handleLogout = () => {
         logOut()
-            .then(() => { setUser(null) })
-            .catch(err => console.log(err.message))
+            .then(() => {
+                setUser(null)
+                toast.success("Sucessfully Logout")
+            })
+            .catch(err => toast.error(err.message))
     }
     return (
         <div className=" ">

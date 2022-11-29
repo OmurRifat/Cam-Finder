@@ -3,8 +3,6 @@ import Modal from '../Modal/Modal';
 
 const Category = ({ data }) => {
     const [booking, setBooking] = useState(false)
-    console.log(booking)
-    // console.log(data);
     const { name, imgURL, condition, location, originalPrice, postedTime, resalePrice, sellerName, sellerNumber, YearOfPurchase, yearOfUse } = data
     return (
         <div className='card card-compact w-96 bg-base-100 shadow-xl'>

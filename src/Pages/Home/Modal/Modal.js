@@ -8,9 +8,8 @@ const Modal = ({ data, setBooking }) => {
     const { user } = useContext(AuthContext);
     // console.log(user)
     const { name, resalePrice } = data;
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const formSubmit = (data, e) => {
-        console.log(data)
         axios.post('http://localhost:5000/orders', data)
             .then(res => {
                 if (res.status === 200) {
