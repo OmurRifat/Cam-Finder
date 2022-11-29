@@ -14,7 +14,7 @@ const LogIn = () => {
         emailSignIn(data.email, data.password)
             .then(result => {
                 setUser(result.user);
-                toast.success("User Registered Sucesfully");
+                toast.success("User LogedIn Sucesfully");
             })
             .catch(error => toast.error(error.message))
     }
