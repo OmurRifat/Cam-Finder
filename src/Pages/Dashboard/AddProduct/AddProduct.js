@@ -3,9 +3,11 @@ import { format } from 'date-fns';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
 
     const handleAddProduct = (data, e) => {
@@ -24,12 +26,15 @@ const AddProduct = () => {
                 if (imgData.success) {
                     data.imgURL = `${imgData.data.url}`;
                     data.postedTime = postedTime;
+                    data.categoryId = parseInt(data.categoryId);
 
 
-                    axios.post('http://localhost:5000/products', data)
+                    axios.post('https://cam-finder-server.vercel.app/products', data)
                         .then(res => {
-                            if (res.status === 200)
+                            if (res.status === 200) {
                                 toast.success("Product Added Sucessfully")
+                                navigate('/dashboard/my-products')
+                            }
                         })
                         .catch(err => toast.error(err.message))
 

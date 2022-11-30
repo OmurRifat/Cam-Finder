@@ -3,7 +3,22 @@ import React from 'react';
 const MyProducts = () => {
     return (
         <div>
-            <h4>This is My Products section.</h4>
+            <div className="overflow-x-auto">
+                <table className="table table-zebra w-full">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product Name</th>
+                            <th>Job</th>
+                            <th>Favorite Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
