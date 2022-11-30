@@ -1,6 +1,5 @@
 import React from 'react';
 import './PageNotFound.css'
-import img1 from '../../../assets/images/404.webp'
 import { Link } from 'react-router-dom';
 
 const PageNotFound = () => {
