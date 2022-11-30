@@ -27,7 +27,7 @@ const Register = () => {
         emailRegister(data.email, data.password)
             .then(result => {
                 updateUser({ displayName: data.name })
-                axios.post('http://localhost:5000/user', userInfo)
+                axios.post('https://cam-finder-server.vercel.app/user', userInfo)
                     .then(fedData => {
                         if (fedData.status === 200) {
                             setUser(result.user)
@@ -49,7 +49,7 @@ const Register = () => {
                     seller: false,
                     admin: false
                 }
-                axios.post('http://localhost:5000/user', userInfo)
+                axios.post('https://cam-finder-server.vercel.app/user', userInfo)
                     .then(fedData => {
                         if (fedData.status === 200) {
                             setUser(result.user)
@@ -67,7 +67,7 @@ const Register = () => {
     // const { data: userData } = useQuery({
     //     queryKey: ['user'],
     //     queryFn: () => {
-    //         fetch('http://localhost:5000/user', {
+    //         fetch('https://cam-finder-server.vercel.app/user', {
     //             method: 'POST',
     //             headers: {
     //                 'content-type': 'application/json',

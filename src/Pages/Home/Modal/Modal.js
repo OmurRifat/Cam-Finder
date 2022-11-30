@@ -10,7 +10,7 @@ const Modal = ({ data, setBooking }) => {
     const { name, resalePrice } = data;
     const { register, handleSubmit, formState: { errors } } = useForm();
     const formSubmit = (data, e) => {
-        axios.post('http://localhost:5000/orders', data)
+        axios.post('https://cam-finder-server.vercel.app/orders', data)
             .then(res => {
                 if (res.status === 200) {
                     toast.success("Successfull Booked.")

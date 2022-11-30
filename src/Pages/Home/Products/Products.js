@@ -5,7 +5,7 @@ import Product from '../Product/Product';
 const Products = () => {
     const [cameras, setCameras] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5000/home-cameras')
+        axios.get('https://cam-finder-server.vercel.app/home-cameras')
             .then(res => setCameras(res.data))
     }, [])
     return (
