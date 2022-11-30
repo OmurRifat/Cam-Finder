@@ -12,6 +12,7 @@ import Blogs from "../../Pages/Home/Blogs/Blogs";
 import Categories from "../../Pages/Home/Categories/Categories";
 import Home from "../../Pages/Home/Home/Home";
 import Products from "../../Pages/Home/Products/Products";
+import PageNotFound from "../../Pages/Shared/PageNotFound/PageNotFound";
 import AdminRoute from "../PrivateRouter/AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRouter/PrivateRoute/PrivateRoute";
 import SellerRoute from "../PrivateRouter/SellerRoute/SellerRoute";
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout></MainLayout>,
+        errorElement: <PageNotFound></PageNotFound>,
         children: ([
             {
                 path: '/',
@@ -51,10 +53,11 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement: <PageNotFound></PageNotFound>,
         children: [
             {
                 path: '/dashboard',
-                element: <div>This will empty at first...</div>
+                element: <div className=" text-primary text-xl font-bold text-center mt-6">Dashboard</div>
             },
             {
                 path: '/dashboard/my-orders',

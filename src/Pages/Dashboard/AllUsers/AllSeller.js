@@ -7,14 +7,14 @@ const AllSeller = () => {
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/user/all-sellers');
+            const res = await fetch('https://cam-finder-server.vercel.app/user/all-sellers');
             const data = await res.json();
             return data;
         }
     })
 
     const handleDelete = (email) => {
-        axios.delete(`http://localhost:5000/user/all-sellers/${email}`)
+        axios.delete(`https://cam-finder-server.vercel.app/user/all-sellers/${email}`)
             .then(res => {
                 if (res.status === 200) {
                     toast.success("Sucessfully Deleted.")

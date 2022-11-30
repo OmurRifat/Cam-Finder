@@ -5,7 +5,7 @@ const Category = ({ data }) => {
     const [booking, setBooking] = useState(false)
     const { name, imgURL, condition, location, originalPrice, postedTime, resalePrice, sellerName, sellerNumber, YearOfPurchase, yearOfUse } = data
     return (
-        <div className='card card-compact w-96 bg-base-100 shadow-xl'>
+        <div className='card card-compact w-80 md:w-96 bg-base-100 shadow-xl'>
             { booking && <Modal
                 data={ data }
                 setBooking={ setBooking }
