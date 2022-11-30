@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
     const { data: allBuyers = [], refetch } = useQuery({
-        queryKey: ['sellers'],
+        queryKey: ['Buyers'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/user/all-buyers');
             const data = await res.json();
@@ -30,20 +30,20 @@ const AllBuyers = () => {
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Seller Name</th>
+                            <th>Buyer Name</th>
                             <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            allBuyers?.map((seller, i) => <tr
+                            allBuyers?.map((Buyer, i) => <tr
                                 key={ i }
                             >
                                 <th>{ i + 1 }</th>
-                                <td>{ seller.name }</td>
-                                <td>{ seller.email }</td>
+                                <td>{ Buyer.name }</td>
+                                <td>{ Buyer.email }</td>
                                 <td>
-                                    <button className='btn btn-primary btn-outline' onClick={ () => handleDelete(seller.email) }>X</button>
+                                    <button className='btn btn-primary btn-outline' onClick={ () => handleDelete(Buyer.email) }>X</button>
                                 </td>
                             </tr>)
                         }

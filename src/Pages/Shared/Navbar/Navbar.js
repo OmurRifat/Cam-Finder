@@ -36,7 +36,7 @@ const Navbar = () => {
                                     <li><Link to="/category/3" >Nikon</Link></li>
                                 </ul>
                             </li>
-                            <li><Link to="" >Blogs</Link></li>
+                            <li><Link to="/blogs" >Blogs</Link></li>
                             <li><Link to="/dashboard" >Dashboard</Link></li>
                         </ul>
                     </div>
@@ -57,7 +57,7 @@ const Navbar = () => {
                                 <li><Link to="/category/3" >Nikon</Link></li>
                             </ul>
                         </li>
-                        <li><Link to="" >Blogs</Link></li>
+                        <li><Link to="/blogs" >Blogs</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
