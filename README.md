@@ -1,4 +1,4 @@
-# EDUCARE - Education Care
+# CAMFINDER - Camera Finder
 
 This is a online resaling store, Here you find all types of used Camera including most premium also. Our Team always try to make the website signeficently user frendly. Hope you enjoy you journey with Cam-Finder
 
